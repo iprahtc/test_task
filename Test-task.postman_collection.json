@@ -1,0 +1,1017 @@
+{
+	"info": {
+		"_postman_id": "5490974e-a524-4c69-8379-5f431f35a4e7",
+		"name": "Test task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Регистрация",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0b0d8d56-e39b-41d5-928c-f0d102e58e96",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"API_TOKEN\", jsonData.data.accessTolen);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "ilya",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "iprahtc@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "qweqweqwe",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "qweqweqwe",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localBasedUrl}}/api/auth/register",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Верификация",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a41db3d4-7a67-4250-8b33-738190315fe3",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"API_TOKEN\", jsonData.data.accessTolen);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{localBasedUrl}}/api/auth/verified?key=b51LveqULIlKZUw5LYCoILb8AumiRAvY",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"verified"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "b51LveqULIlKZUw5LYCoILb8AumiRAvY"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Авторизация",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a41db3d4-7a67-4250-8b33-738190315fe3",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"API_TOKEN\", jsonData.data.accessTolen);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "iprahtc@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "qweqweqwe",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localBasedUrl}}/api/auth/login",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Выход",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localBasedUrl}}/api/auth/logout",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Профайл",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a41db3d4-7a67-4250-8b33-738190315fe3",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{localBasedUrl}}/api/auth/profiler",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"profiler"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Новости",
+			"item": [
+				{
+					"name": "Создание новости",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "heading",
+									"value": "heading",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "text",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localBasedUrl}}/api/publication",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"publication"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить все новости",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localBasedUrl}}/api/publication",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"publication"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить новость по id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localBasedUrl}}/api/publication/10",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"publication",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Редактировать новости",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{localBasedUrl}}/api/publication/1?heading=test&description=test text",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"publication",
+								"1"
+							],
+							"query": [
+								{
+									"key": "heading",
+									"value": "test"
+								},
+								{
+									"key": "description",
+									"value": "test text"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удалить новость по id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localBasedUrl}}/api/publication/3",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"publication",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить мои новости",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{localBasedUrl}}/api/my-publication",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"my-publication"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Подписка",
+			"item": [
+				{
+					"name": "Подписаться",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{localBasedUrl}}/api/subscribe/9",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"subscribe",
+								"9"
+							]
+						},
+						"description": "Передаем в ссылке id пользователя на котого нужно подписаться"
+					},
+					"response": []
+				},
+				{
+					"name": "Отписка",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{localBasedUrl}}/api/unsubscribe/8",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"unsubscribe",
+								"8"
+							]
+						},
+						"description": "Передаем в ссылке id пользователя на котого нужно подписаться"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Комментарии",
+			"item": [
+				{
+					"name": "Ответы на комментарий",
+					"item": [
+						{
+							"name": "Создание ответа",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{API_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "comment_id",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "text",
+											"value": "answer two",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{localBasedUrl}}/api/answer-comment",
+									"host": [
+										"{{localBasedUrl}}"
+									],
+									"path": [
+										"api",
+										"answer-comment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Получить все ответы на коментарии пользователя",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{API_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{localBasedUrl}}/api/answer-comment",
+									"host": [
+										"{{localBasedUrl}}"
+									],
+									"path": [
+										"api",
+										"answer-comment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Получить отве на комментарий по id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{API_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{localBasedUrl}}/api/comment/1",
+									"host": [
+										"{{localBasedUrl}}"
+									],
+									"path": [
+										"api",
+										"comment",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Редактировать комментарий",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{API_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{localBasedUrl}}/api/comment/1?publication_id=1&text=test text",
+									"host": [
+										"{{localBasedUrl}}"
+									],
+									"path": [
+										"api",
+										"comment",
+										"1"
+									],
+									"query": [
+										{
+											"key": "publication_id",
+											"value": "1"
+										},
+										{
+											"key": "text",
+											"value": "test text"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Удалить комментарий по id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{API_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{localBasedUrl}}/api/comment/1",
+									"host": [
+										"{{localBasedUrl}}"
+									],
+									"path": [
+										"api",
+										"comment",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Создание комментария",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "publication_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "text2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localBasedUrl}}/api/comment",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить все комментарии пользователя",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{localBasedUrl}}/api/comment",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить комментарий по id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localBasedUrl}}/api/comment/1",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"comment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Редактировать комментарий",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{localBasedUrl}}/api/comment/1?publication_id=1&text=test text",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"comment",
+								"1"
+							],
+							"query": [
+								{
+									"key": "publication_id",
+									"value": "1"
+								},
+								{
+									"key": "text",
+									"value": "test text"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удалить комментарий по id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localBasedUrl}}/api/comment/1",
+							"host": [
+								"{{localBasedUrl}}"
+							],
+							"path": [
+								"api",
+								"comment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e5e281cf-a570-457c-ae22-b4df2b6514f5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4ace3017-871d-4882-a130-6b6855ad5f6a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

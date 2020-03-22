@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\PublicationCreatedEvent;
 use Illuminate\Database\Eloquent\Model;
 
 class Publication extends Model
@@ -14,5 +15,8 @@ class Publication extends Model
         return $this->belongsTo(User::class);
     }
 
+    protected $dispatchesEvents = [
+        'created' => PublicationCreatedEvent::class,
+    ];
 
 }

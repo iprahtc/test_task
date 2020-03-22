@@ -35,32 +35,23 @@ class PublicationController extends Controller
 
     /**
      * @param Publication $publication
-     * @param $id
      * @return PublicationResource|\Illuminate\Http\JsonResponse
      */
-    public function show(Publication $publication, $id)
+    public function show(Publication $publication)
     {
-        $new = $publication->find($id);
-
-        if($new)
-            return new PublicationResource($new);
-        else
-            return $this->getModelNotFound(__('massages.model_not_found'));
+        return new PublicationResource($publication);
     }
 
     /**
      * @param PublicationRequest $request
      * @param Publication $publication
-     * @param $id
      * @return PublicationResource|\Illuminate\Http\JsonResponse
      */
-    public function update(PublicationRequest $request, Publication $publication, $id)
+    public function update(PublicationRequest $request, Publication $publication)
     {
-        $new = auth()->user()->publications()->find($id);
-
-        if($new){
-            $new->update($request->validated());
-            return new PublicationResource($new);
+        if($publication->user_id === auth()->user()->id){
+            $publication->update($request->validated());
+            return new PublicationResource($publication);
         }
         else
             return $this->getModelNotFound(__('massages.model_not_found'));
@@ -68,15 +59,12 @@ class PublicationController extends Controller
 
     /**
      * @param Publication $publication
-     * @param $id
-     * @return PublicationResource|\Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Publication $publication, $id)
+    public function destroy(Publication $publication)
     {
-        $new = auth()->user()->publications()->find($id);
-
-        if($new){
-            $new->delete();
+        if($publication->user_id === auth()->user()->id){
+            $publication->delete();
             return $this->getSuccessResponse();
         }
         else

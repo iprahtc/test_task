@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\VerifiedRequest;
+use App\Http\Resources\ProfileResource;
 use App\Http\Resources\UserResource;
 use App\Notifications\ConfirmationRegistrationNotification;
 use App\Models\User;
@@ -86,5 +87,9 @@ class AuthController extends Controller
         $user->accessTolen = $user->createToken('authToken')->accessToken;
 
         return new UserResource($user);
+    }
+
+    public function getProfiler(){
+        return new ProfileResource(auth()->user());
     }
 }

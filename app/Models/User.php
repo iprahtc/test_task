@@ -40,4 +40,12 @@ class User extends Authenticatable
     public function publications(){
         return $this->hasMany(Publication::class);
     }
+
+    public function subscribers(){
+        return $this->hasMany(Subscription::class, 'to_user_id');
+    }
+
+    public function subscriptions(){
+        return $this->hasMany(Subscription::class);
+    }
 }

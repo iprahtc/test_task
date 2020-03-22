@@ -19,11 +19,17 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Api'], function() {
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::get('verified', 'AuthController@verified')->name('verified');
+
+    Route::get('profiler', 'AuthController@getProfiler')->middleware('auth:api');
 });
 
 Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
-    Route::get('my-news', 'PublicationController@getUserPublications');
     Route::apiResources([
-        'news' => 'PublicationController',
+        'publication' => 'PublicationController'
     ]);
+
+    Route::get('my-publication', 'PublicationController@getUserPublications');
+
+    Route::get('subscribe/{user}', 'SubscriptionController@subscribe');
+    Route::get('unsubscribe/{user}', 'SubscriptionController@unsubscribe');
 });

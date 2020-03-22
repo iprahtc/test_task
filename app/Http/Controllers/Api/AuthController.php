@@ -14,6 +14,10 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    /**
+     * @param RegisterRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function register(RegisterRequest $request){
         $data = $request->validated();
         $data['password'] = bcrypt($request->validated()['password']);
@@ -23,11 +27,13 @@ class AuthController extends Controller
         //send link verified
         $user->notify(new ConfirmationRegistrationNotification($data['verified_key']));
 
-        $user->accessTolen = $user->createToken('authToken')->accessToken;
-
         return $this->getResponse(__('auth.verified'));
     }
 
+    /**
+     * @param LoginRequest $request
+     * @return UserResource|\Illuminate\Http\JsonResponse
+     */
     public function login(LoginRequest $request){
         if(!auth()->attempt($request->validated())){
             return $this->getErrorResponse(__('auth.user_not_found'));
@@ -45,6 +51,10 @@ class AuthController extends Controller
         return new UserResource($user);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout(Request $request){
         if(!$this->guard()->check()){
             return $this->getErrorResponse(__('auth.token_not_found'));
@@ -55,10 +65,17 @@ class AuthController extends Controller
         return $this->getResponse(__('auth.token_deleted'));
     }
 
+    /**
+     * @return mixed
+     */
     protected function guard(){
         return auth()->guard('api');
     }
 
+    /**
+     * @param VerifiedRequest $request
+     * @return UserResource
+     */
     public function verified(VerifiedRequest $request){
         $user = User::where('verified_key', $request->validated()['key'])->first();
 

@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Publication extends Model
 {
     protected $fillable = [
-        'heading', 'text_heading', 'description', 'user_id'
+        'heading', 'description', 'user_id'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+
 }

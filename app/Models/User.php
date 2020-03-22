@@ -48,4 +48,11 @@ class User extends Authenticatable
     public function subscriptions(){
         return $this->hasMany(Subscription::class);
     }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+    public function answerComments(){
+        return $this->hasMany(AnswerComment::class);
+    }
 }

@@ -25,7 +25,9 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Api'], function() {
 
 Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
     Route::apiResources([
-        'publication' => 'PublicationController'
+        'publication' => 'PublicationController',
+        'comment' => 'CommentController',
+        'answer-comment' => 'AnswerCommentController'
     ]);
 
     Route::get('my-publication', 'PublicationController@getUserPublications');

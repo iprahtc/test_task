@@ -35,5 +35,6 @@
 8. Create the encryption keys needed to generate tokens (`php artisan passport:install`)
 9. Seeds (`php artisan db:seed`) (The task is not said, but may have time to add)
 10. Queue (`php artisan queue:work`)
-14. Enjoy 😎
+11. Postman API - Test-task.postman_collection.json
+12. Enjoy 😎
 
